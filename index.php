@@ -1,4 +1,7 @@
 <?php
+
+use Carbon\Carbon;
+
 require __DIR__ . '/vendor/autoload.php';
 
 $client = new \GuzzleHttp\Client();
@@ -26,7 +29,7 @@ $sth = $database->prepare($sql);
 $sth->execute();
 
 $red = $sth->fetchAll(2);
-var_dump($red);
+//var_dump($red);
 ?>
 <!doctype html>
 <html lang="fr">
@@ -50,6 +53,7 @@ var_dump($red);
     <tr>
         <th>NOM</th>
         <th>DESCRIPTION</th>
+        <th>dt</th>
     </tr>
     </thead>
 
@@ -58,6 +62,7 @@ var_dump($red);
         <tr>
             <td nowrap><?php echo $value->ManufacturerItemNumber?></td>
             <td><?php echo $value->Description?></td>
+            <td nowrap><?php echo (Carbon::now())->format('d-m-Y')?></td>
         </tr>
     <?php endforeach?>
     </tbody>

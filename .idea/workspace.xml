@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/index.php" line="64" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="46107511-3e0f-449b-98d3-1607db680b52" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,18 +16,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="3639" />
+    <option name="totalTimeSeconds" value="3964" />
   </component>
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="50" column="15" lean-forward="true" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="15" />
+            <state relative-caret-position="792">
+              <caret line="64" column="64" lean-forward="false" selection-start-line="64" selection-start-column="64" selection-end-line="64" selection-end-column="64" />
               <folding>
-                <marker date="1539290394569" expanded="true" signature="665:672" ph="SELECT nom, fruit" />
-                <marker date="1539290394569" expanded="true" signature="665:684" ph="SELECT * fro... it_it" />
+                <marker date="1539290761043" expanded="true" signature="686:693" ph="SELECT nom, fruit" />
+                <marker date="1539290761043" expanded="true" signature="686:705" ph="SELECT * fro... it_it" />
               </folding>
             </state>
           </provider>
@@ -162,12 +166,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1539286214471</updated>
-      <workItem from="1539286215751" duration="4167000" />
+      <workItem from="1539286215751" duration="4613000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4167000" />
+    <option name="totallyTimeSpent" value="4613000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -243,11 +247,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="50" column="15" lean-forward="true" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="15" />
+        <state relative-caret-position="792">
+          <caret line="64" column="64" lean-forward="false" selection-start-line="64" selection-start-column="64" selection-end-line="64" selection-end-column="64" />
           <folding>
-            <marker date="1539290394569" expanded="true" signature="665:672" ph="SELECT nom, fruit" />
-            <marker date="1539290394569" expanded="true" signature="665:684" ph="SELECT * fro... it_it" />
+            <marker date="1539290761043" expanded="true" signature="686:693" ph="SELECT nom, fruit" />
+            <marker date="1539290761043" expanded="true" signature="686:705" ph="SELECT * fro... it_it" />
           </folding>
         </state>
       </provider>
