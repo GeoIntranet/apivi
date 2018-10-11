@@ -2,6 +2,7 @@
     "name": "api/api",
     "description": "api test",
     "require": {
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "nesbot/carbon": "^2.3"
     }
 }

@@ -48,7 +48,7 @@ var_dump($red);
 <table class="table table-border">
     <thead>
     <tr>
-        <th>NOM </th>
+        <th>NOM</th>
         <th>DESCRIPTION</th>
     </tr>
     </thead>
