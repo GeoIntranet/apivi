@@ -1,0 +1,7 @@
+{
+    "name": "api/api",
+    "description": "api test",
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}
