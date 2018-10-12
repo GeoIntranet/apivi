@@ -1,35 +1,25 @@
 <?php
-
+//https://services.scansource.com/apisandbox/swagger/ui/index#/
+//API Key
+//Customer # 1000000854
 use Carbon\Carbon;
-
 require __DIR__ . '/vendor/autoload.php';
 
-$client = new \GuzzleHttp\Client();
-$data = $client->request('GET', 'https://services.scansource.com/api/product/search', [
-    'headers' => [
-        'Ocp-Apim-Subscription-Key'      => 'DpHO1fNQO8XUpFyk2CwgMkIGt2iK5g0w'
-    ],
-    'query' =>[
-        'customerNumber' => '1000000854',
-        'includeObsolete' => 'true',
-        'searchText' => 'MC92',
-        'pageSize' => '1',
-        'page' => '1',
-    ]
-]);
+    $key = 'DpHO1fNQO8XUpFyk2CwgMkIGt2iK5g0w';
+    $client = new \GuzzleHttp\Client();
 
-$listdata = $data->getBody();
-$listdata_ = json_decode($listdata->getContents());
-require('connection.php');
-$database = new database();
-$database = $database->connec();
-var_dump($database);
-$sql = 'SELECT * FROM it_it';
-$sth = $database->prepare($sql);
-$sth->execute();
+    $currentCart = $client->request('GET', 'https://services.scansource.com/apisandbox/cart/list/euroweb', [
+        'headers' => [
+            'Ocp-Apim-Subscription-Key'      => $key
+        ],
+        'query' =>[
+        ]
+    ])
+    ->getBody()
+    ->getContents();
 
-$red = $sth->fetchAll(2);
-//var_dump($red);
+$listdata_ = json_decode($currentCart);
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -47,43 +37,131 @@ $red = $sth->fetchAll(2);
     <title>Document</title>
 </head>
 <body>
-<button onclick="createNew()">add new </button>
-<table class="table table-border">
-    <thead>
-    <tr>
-        <th>NOM</th>
-        <th>DESCRIPTION</th>
-        <th>dt</th>
-    </tr>
-    </thead>
 
-    <tbody id="table-body">
-    <?php foreach($listdata_ as $index  => $value) :?>
+<br><br><br><br>
+<div style="margin: 0 30px 0 30px">
+
+    <button class="btn btn-primary" onclick="createNew()">Nouvelle session pannier</button>
+    <br>
+    <br>
+    <table class="table table-border">
+        <thead>
         <tr>
-            <td nowrap><?php echo $value->ManufacturerItemNumber?></td>
-            <td><?php echo $value->Description?></td>
-            <td nowrap><?php echo (Carbon::now())->format('d-m-Y')?></td>
+            <th>ID</th>
+            <th>NOM</th>
+            <th>DESCRIPTION</th>
+            <th>dt</th>
+            <th>#</th>
         </tr>
-    <?php endforeach?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <tr id="new_session" style="display: none">
+            <td>X</td>
+            <td><input type="text" id="txt_name" placeholder="test" class="form-control" ></td>
+            <td><input type="text" id="txt_description" placeholder="test" class="form-control" ></td>
+            <td>
+
+                <button class="btn btn-primary" onClick="getSaveInput()">Save</button>
+                <button class="btn btn-danger" onclick="cancelAdd()">Cancel</button>
+            </td>
+        </tr>
+        </tbody>
+
+        <tbody id="table-body">
+        <?php //var_dump($listdata_) ?>
+        <?php foreach($listdata_->Carts as $index  => $value) :?>
+            <tr id="cart_<?php echo $value->Id?>" >
+                <td nowrap>->
+                    <?php if($listdata_->CurrentCartId === $value->Id): ?>
+                        <?php echo "<b style='color:mediumseagreen'>$value->Id</b>"?>
+                    <?php else :?>
+                        <?php echo $value->Id?>
+                    <?php endif ?>
+                </td>
+                <td nowrap><?php print_r($value->Name)?></td>
+                <td><?php print_r($value->Description)?></td>
+                <td nowrap><?php echo (Carbon::now())->format('d-m-Y')?></td>
+                <td>
+                    <button class="btn btn-danger" id="<?php echo $value->Id?>" onclick="deleteCart(<?php echo $value->Id?>)">delete</button>
+                    <button class="btn btn-primary" id="<?php echo $value->Id?>" onclick="getUpdateFormCart(<?php echo $value->Id?>)">update</button>
+                </td>
+            </tr>
+        <?php endforeach?>
+
+        </tbody>
+    </table>
+</div>
+
 <script>
-    function createNew() {
-        $("#add-more").hide();
-        var data = '<tr class="table-row" id="new_row_ajax">' +
-            '<td contenteditable="true" id="txt_title" onBlur="addToHiddenField(this,\'title\')" onClick="editRow(this);"></td>' +
-            '<td contenteditable="true" id="txt_description" onBlur="addToHiddenField(this,\'description\')" onClick="editRow(this);"></td>' +
-            '<td><input type="hidden" id="title" /><input type="hidden" id="description" /><span id="confirmAdd"><a onClick="addToDatabase()" class="ajax-action-links">Save</a> / <a onclick="cancelAdd();" class="ajax-action-links">Cancel</a></span></td>' +
-            '</tr>';
-        $("#table-body").append(data);
+
+    function getUpdateFormCart(id){
+      var updateName = '';
+      var updateDescription = '';
+      var inputs = $("#cart_"+id).find('td');
+      console.log(inputs[1]);
+      console.log(inputs[2]);
     }
+
+    function deleteCart(id){
+        $.ajax({
+            url: "delete_cart.php",
+            type: "post",
+            data:'id='+id,
+            success: function(data){
+                var jsonData = jQuery.parseJSON(data);
+                $("#cart_"+jsonData.id).remove();
+            }
+        });
+    }
+
+    function createNew() {
+        $("#new_session").show();
+    }
+
+
     function cancelAdd() {
-        $("#add-more").show();
-        $("#new_row_ajax").remove();
+        resetInput();
+        $("#new_session").toggle();
+    }
+
+     function resetInput(){
+        $("#txt_name").val(" ") ;
+        $("#txt_description").val(" ");
+    }
+
+    /**
+     *
+     * @param addColumn
+     * @param hiddenField
+     */
+    function getSaveInput() {
+        var description = $('#txt_description').val();
+        var name = $('#txt_name').val();
+
+        if(name.length > 1 && description.length > 1){
+            console.log('requette ajax');
+            $.ajax({
+                url: "new_cart.php",
+                type: "POST",
+                data:'name='+name+'&description='+description,
+                success: function(data){
+                    resetInput();
+                    var jsonData = jQuery.parseJSON(data);
+                    var newValue = '<tr id="cart_'+jsonData.id+'"><td>'+jsonData.id+'</td><td>'+jsonData.name+'</td><td>'+jsonData.description+'</td><td></td>' +
+                        '<td>' +
+                            '<button class="btn btn-danger" id='+jsonData.id+' onClick="deleteCart('+jsonData.id+')">delete</button>'+
+                        '</td>' +
+                        '</tr>'
+                    $("#table-body").prepend(newValue);
+                    $("#new_session").toggle();
+
+                }
+            });
+        }
+
     }
 
     $(document).ready(function(){
-
         console.log('test')
     })
 </script>
