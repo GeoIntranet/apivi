@@ -71,18 +71,19 @@ $listdata_ = json_decode($currentCart);
         <?php //var_dump($listdata_) ?>
         <?php foreach($listdata_->Carts as $index  => $value) :?>
             <tr id="cart_<?php echo $value->Id?>" >
-                <td nowrap>->
+                <td nowrap id="id_cart_<?php echo $value->Id?>">->
                     <?php if($listdata_->CurrentCartId === $value->Id): ?>
                         <?php echo "<b style='color:mediumseagreen'>$value->Id</b>"?>
                     <?php else :?>
                         <?php echo $value->Id?>
                     <?php endif ?>
                 </td>
-                <td nowrap><?php print_r($value->Name)?></td>
-                <td><?php print_r($value->Description)?></td>
+                <td nowrap id="name_cart_<?php echo $value->Id?>"><?php print_r($value->Name)?></td>
+                <td id="desc_cart_<?php echo $value->Id?>"><?php print_r($value->Description)?></td>
                 <td nowrap><?php echo (Carbon::now())->format('d-m-Y')?></td>
                 <td>
                     <button class="btn btn-danger" id="<?php echo $value->Id?>" onclick="deleteCart(<?php echo $value->Id?>)">delete</button>
+
                     <button class="btn btn-primary" id="<?php echo $value->Id?>" onclick="getUpdateFormCart(<?php echo $value->Id?>)">update</button>
                 </td>
             </tr>
@@ -98,6 +99,7 @@ $listdata_ = json_decode($currentCart);
       var updateName = '';
       var updateDescription = '';
       var inputs = $("#cart_"+id).find('td');
+      console.log(inputs.next());
       console.log(inputs[1]);
       console.log(inputs[2]);
     }
@@ -147,9 +149,10 @@ $listdata_ = json_decode($currentCart);
                 success: function(data){
                     resetInput();
                     var jsonData = jQuery.parseJSON(data);
-                    var newValue = '<tr id="cart_'+jsonData.id+'"><td>'+jsonData.id+'</td><td>'+jsonData.name+'</td><td>'+jsonData.description+'</td><td></td>' +
+                        var newValue = '<tr id="cart_'+jsonData.id+'"><td id="id_cart_'+jsonData.id+'">->'+jsonData.id+'</td><td id="name_cart_'+jsonData.id+'">'+jsonData.name+'</td><td id="desc_cart_'+jsonData.id+'">'+jsonData.description+'</td><td></td>' +
                         '<td>' +
-                            '<button class="btn btn-danger" id='+jsonData.id+' onClick="deleteCart('+jsonData.id+')">delete</button>'+
+                            '<button class="btn btn-danger" id='+jsonData.id+' onClick="deleteCart('+jsonData.id+')">delete</button> '+
+                            ' <button class="btn btn-primary" id='+jsonData.id+' onClick="getUpdateFormCart('+jsonData.id+')">update</button>'+
                         '</td>' +
                         '</tr>'
                     $("#table-body").prepend(newValue);
