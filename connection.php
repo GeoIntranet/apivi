@@ -18,10 +18,9 @@ class database{
         $this->password = '';
     }
 
-    public function connec()
+    public function connect()
     {
         try {
-
             return $this->database = new PDO($this->dsn, $this->user, $this->password);
         } catch (PDOException $e) {
             echo 'Connexion échouée : ' . $e->getMessage();

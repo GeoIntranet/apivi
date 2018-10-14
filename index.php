@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Ocp-Apim-Subscription-Key: DpHO1fNQO8XUpFyk2CwgMkIGt2iK5g0w");
 //https://services.scansource.com/apisandbox/swagger/ui/index#/
 //API Key
 //Customer # 1000000854
@@ -33,6 +35,8 @@ $listdata_ = json_decode($currentCart);
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous">
     </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
@@ -42,6 +46,7 @@ $listdata_ = json_decode($currentCart);
 <div style="margin: 0 30px 0 30px">
 
     <button class="btn btn-primary" onclick="createNew()">Nouvelle session pannier</button>
+    <button class="btn btn-info" onclick="refreshSession()">actualiser</button>
     <br>
     <br>
     <table class="table table-border">
@@ -95,6 +100,7 @@ $listdata_ = json_decode($currentCart);
 
 <script>
 
+
     function getUpdateFormCart(id){
       var updateName = '';
       var updateDescription = '';
@@ -131,10 +137,27 @@ $listdata_ = json_decode($currentCart);
         $("#txt_description").val(" ");
     }
 
+    function refreshSession() {
+        var PRIV_KEY = "0b21f6745e54dbdd87529df6b963ae21f89c12cb";
+        var PUBLIC_KEY = "f5b5849487d06f92a19e64d7bffee663";
+        var ts = new Date().getTime();
+        var hash = CryptoJS.MD5(ts + PRIV_KEY + PUBLIC_KEY).toString();
+        $.ajax({
+            url: "https://gateway.marvel.com:443/v1/public/characters",
+            type: "get",
+            data:{
+                ts:ts,
+                apikey: PUBLIC_KEY,
+                hash: hash,
+            },
+            success: function(data){
+                var jsonData = jQuery.parseJSON(data);
+                $("#cart_"+jsonData.id).remove();
+            }
+        });
+    }
+
     /**
-     *
-     * @param addColumn
-     * @param hiddenField
      */
     function getSaveInput() {
         var description = $('#txt_description').val();
@@ -157,7 +180,6 @@ $listdata_ = json_decode($currentCart);
                         '</tr>'
                     $("#table-body").prepend(newValue);
                     $("#new_session").toggle();
-
                 }
             });
         }
