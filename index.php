@@ -1,6 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Ocp-Apim-Subscription-Key: DpHO1fNQO8XUpFyk2CwgMkIGt2iK5g0w");
+
 //https://services.scansource.com/apisandbox/swagger/ui/index#/
 //API Key
 //Customer # 1000000854
@@ -48,6 +47,16 @@ $listdata_ = json_decode($currentCart);
     <button class="btn btn-primary" onclick="createNew()">Nouvelle session pannier</button>
     <button class="btn btn-info" onclick="refreshSession()">actualiser</button>
     <br>
+    <br>
+    <table class="table table-border" id="updateRow" style="display: none">
+        <thead>
+            <tr>
+                <th colspan="5">MISE A JOUR</th>
+            </tr>
+        </thead>
+        <tbody id="updateTable">
+        </tbody>
+    </table>
     <br>
     <table class="table table-border">
         <thead>
@@ -100,14 +109,25 @@ $listdata_ = json_decode($currentCart);
 
 <script>
 
+    function updateData(){
+        console.log('saveData');
+    }
 
     function getUpdateFormCart(id){
-      var updateName = '';
-      var updateDescription = '';
-      var inputs = $("#cart_"+id).find('td');
-      console.log(inputs.next());
-      console.log(inputs[1]);
-      console.log(inputs[2]);
+        var updateName = $('#name_cart_'+id).text();
+        var updateDesc = $('#desc_cart_'+id).text();
+        var updatedId='updated_id';
+        var updatedNameCart='updated_name_cart_'+id;
+        var updatedDescCart='updated_desc_cart_'+id;
+
+        $('#updateTable').append('<tr id="updateRowTable" class="updtrow">'+
+                '<td id='+updatedId+'>'+id+'<td>'+
+                '<td><input id='+updatedNameCart+' class="form-control" type="text" name="update_name" value='+updateName+'><td>'+
+                '<td><input id='+updatedDescCart+' class="form-control" type="text" name="update_desc" value='+updateDesc+'><td>'+
+                '<td> <button class="btn btn-primary" id="saveUpdateData" >Save</button> <button id="cancelUpdateData" class="btn btn-danger" >Cancel</button><td>'+
+            '</tr>');
+
+        $('#updateRow').toggle();
     }
 
     function deleteCart(id){
@@ -149,10 +169,12 @@ $listdata_ = json_decode($currentCart);
                 ts:ts,
                 apikey: PUBLIC_KEY,
                 hash: hash,
+                limit: 100,
             },
             success: function(data){
-                var jsonData = jQuery.parseJSON(data);
-                $("#cart_"+jsonData.id).remove();
+                //var jsonData = jQuery.parseJSON(data);
+                console.log(data.data);
+                //$("#cart_"+jsonData.id).remove();
             }
         });
     }
@@ -180,15 +202,45 @@ $listdata_ = json_decode($currentCart);
                         '</tr>'
                     $("#table-body").prepend(newValue);
                     $("#new_session").toggle();
+                    location.reload();
                 }
             });
         }
-
     }
 
-    $(document).ready(function(){
-        console.log('test')
-    })
+    (function(){
+        $(document).on( "click", "#saveUpdateData", function() {
+            var id = $('#updated_id').text();
+            var updatedName = $('#updated_name_cart_'+id).val();
+            var updatedDesc = $('#updated_desc_cart_'+id).val();
+
+            $.ajax({
+                url: "update_cart.php",
+                type: "POST",
+                data:{
+                    id:id,
+                    name:updatedName,
+                    desc:updatedDesc,
+                },
+                success: function(data){
+                    console.log(data);
+                    $('#updateRowTable').remove();
+                    $('#updateRow').toggle();
+                    location.reload();
+                },
+            });
+
+        });
+
+        $(document).on( "click", "#cancelUpdateData", function() {
+            $('#updateRowTable').remove();
+            $('#updateRow').toggle();
+        });
+
+        
+    })(jQuery)
+
+
 </script>
 </body>
 </html>
