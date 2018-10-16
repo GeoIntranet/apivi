@@ -9,6 +9,7 @@ require __DIR__ . '/vendor/autoload.php';
     $key = 'DpHO1fNQO8XUpFyk2CwgMkIGt2iK5g0w';
     $client = new \GuzzleHttp\Client();
 
+    //$client->request(method,url,[options [] ])->getBody()->getcontents()
     $currentCart = $client->request('GET', 'https://services.scansource.com/apisandbox/cart/list/euroweb', [
         'headers' => [
             'Ocp-Apim-Subscription-Key'      => $key
@@ -145,7 +146,6 @@ $listdata_ = json_decode($currentCart);
     function createNew() {
         $("#new_session").show();
     }
-
 
     function cancelAdd() {
         resetInput();
