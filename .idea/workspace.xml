@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46107511-3e0f-449b-98d3-1607db680b52" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,17 +12,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="37658" />
+    <option name="totalTimeSeconds" value="24839" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4716">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="-1548">
+              <caret line="130" column="7" lean-forward="false" selection-start-line="130" selection-start-column="7" selection-end-line="130" selection-end-column="7" />
               <folding>
-                <marker date="1539689495054" expanded="true" signature="3019:3039" ph="..." />
+                <marker date="1539707483491" expanded="true" signature="2791:2811" ph="..." />
               </folding>
             </state>
           </provider>
@@ -222,14 +221,12 @@
       <updated>1539286214471</updated>
       <workItem from="1539286215751" duration="4613000" />
       <workItem from="1539327656128" duration="16747000" />
-      <workItem from="1539425691047" duration="9675000" />
-      <workItem from="1539607830607" duration="51000" />
-      <workItem from="1539689043374" duration="452000" />
+      <workItem from="1539425691047" duration="11291000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49591000" />
+    <option name="totallyTimeSpent" value="32651000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1186" extended-state="7" />
@@ -273,7 +270,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1539689495054" expanded="true" signature="3019:3039" ph="..." />
+            <marker date="1539707483491" expanded="true" signature="2791:2811" ph="..." />
           </folding>
         </state>
       </provider>
@@ -417,7 +414,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1539689495054" expanded="true" signature="3019:3039" ph="..." />
+            <marker date="1539707483491" expanded="true" signature="2791:2811" ph="..." />
           </folding>
         </state>
       </provider>
@@ -686,10 +683,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4716">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="-1548">
+          <caret line="130" column="7" lean-forward="false" selection-start-line="130" selection-start-column="7" selection-end-line="130" selection-end-column="7" />
           <folding>
-            <marker date="1539689495054" expanded="true" signature="3019:3039" ph="..." />
+            <marker date="1539707483491" expanded="true" signature="2791:2811" ph="..." />
           </folding>
         </state>
       </provider>

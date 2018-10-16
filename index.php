@@ -109,6 +109,23 @@ $listdata_ = json_decode($currentCart);
 </div>
 
 <script>
+    function    ajaxCall(){
+        $.ajax({
+           url:'xxxx',
+           type:'get',
+            headers:''
+           data:{
+               name :'geoffrey',
+               age:30
+           },
+            success:function(response){
+
+            },
+            error:function(response){
+
+            }
+        });
+    }
 
     function updateData(){
         console.log('saveData');
@@ -132,15 +149,7 @@ $listdata_ = json_decode($currentCart);
     }
 
     function deleteCart(id){
-        $.ajax({
-            url: "delete_cart.php",
-            type: "post",
-            data:'id='+id,
-            success: function(data){
-                var jsonData = jQuery.parseJSON(data);
-                $("#cart_"+jsonData.id).remove();
-            }
-        });
+       
     }
 
     function createNew() {
